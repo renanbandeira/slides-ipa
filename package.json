@@ -1,0 +1,40 @@
+{
+	"name": "pptxgenjs-react-demo",
+	"version": "3.3.0",
+	"private": true,
+	"dependencies": {
+		"@types/cheerio": "^0.22.21",
+		"@types/request": "^2.48.5",
+		"cheerio": "^1.0.0-rc.3",
+		"local-cors-proxy": "^1.1.0",
+		"pptxgenjs": "^3.3.0",
+		"react": "^16.10.1",
+		"react-dom": "^16.10.1",
+		"react-scripts": "3.1.2",
+		"request": "^2.88.2",
+		"typescript": "^3.9.7"
+	},
+	"homepage": "https://gitbrent.github.io/PptxGenJS/demo-react",
+	"scripts": {
+		"proxy": "lcp --proxyUrl https://www.letras.mus.br",
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
+}
