@@ -6,6 +6,7 @@
 		"@types/cheerio": "^0.22.21",
 		"@types/request": "^2.48.5",
 		"cheerio": "^1.0.0-rc.3",
+		"express": "^4.17.1",
 		"local-cors-proxy": "^1.1.0",
 		"pptxgenjs": "^3.3.0",
 		"react": "^16.10.1",
