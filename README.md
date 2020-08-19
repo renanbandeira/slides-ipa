@@ -1,77 +1,35 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# This project is a fork from react-demo of PptxGenJS
+This project is a fork from react-demo of [PptxGenJS](https://github.com/gitbrent/PptxGenJS/tree/master/demos/react-demo) and is hosted on Heroku.
 
-## Available Scripts
+The main goal of this project is to create song gospel lyrics pptx presentations faster. All the customisation in this project is for the Presbyterian Church of Aldeota (Igreja Presbiteriana da Aldeota), in Fortaleza, Brazil.
 
-In the project directory, you can run:
+## Pre-requisites
 
-### `npm start`
+Due to CORS errors, I had to create a scrapping API to get DOM from letras.mus.br. The API code is available [here](https://github.com/renanbandeira/lyrics-scrapping). It is also hosted on Heroku and can be easily used with this application. If you do not want to use the load lyrics from letras.mus.br field, you should ignore this.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You also will need npm, Node and yarn to run this project.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Instalation
 
-### `npm test`
+To run locally, you should fork this project and run:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+yarn install
+```
 
-### `npm run build`
+This will install all the dependencies. Then, just run:
+```
+yarn start
+```
+to run locally this project
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Customisation
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+If you want to customize for your church or project, you should:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1- Change background images from presentations (they are base64 images loaded from `src/worshipRes.tsx` and `hymnRes.tsx`). They have two base64 images for each file, one for the master slide (with song title and artist) and the other for all the following slides. You just need to change the Base64 in those files (if you need help to get the Base64 from your image, you can get it [here](https://www.base64-image.de/)).
 
-### Deploy Webapp
+2- Change, if you think is necessary, the text formatting options for each data: [this](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/Test.tsx#L45-L53) is the code for the song title, [this](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/Test.tsx#L55-L63) is the code for song artist, and [this](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/Test.tsx#L80-L89) is the code for the lyrics. You can find more formatting options [here](https://gitbrent.github.io/PptxGenJS/docs/api-text.html).
 
-BDE: Copy contents of `./build` to gh-pages branch `./demo-react`
-BDE: [Demo React App](https://gitbrent.github.io/PptxGenJS/demo-react/index.html)
-
----
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+3- Run locally to get your presentations or deploy it on somewhere!
