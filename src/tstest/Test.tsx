@@ -43,23 +43,23 @@ function basicDemoSlide(pptx: pptxgen, title: string, subtitle: string) {
 
 	let slide3 = pptx.addSlide({ sectionTitle: "SongTitle", masterName: "MASTER_SLIDE" });
 	let opts: pptxgen.TextPropsOptions = {
-		x: 0,
+		x: 0.8,
 		y: "40%",
 		w: "100%",
 		color: '#FFFFFF',
 		h: 1.5,
-		align: "center",
-		fontSize: 44,
+		align: "left",
+		fontSize: 75,
 	};
 
 	let opts2: pptxgen.TextPropsOptions = {
-		x: 0,
+		x: 0.8,
 		y: "50%",
 		w: "100%",
 		h: 1.5,
-		color: '#FFFFFF',
-		align: "center",
-		fontSize: 38,
+		color: '#E4B44C',
+		align: "left",
+		fontSize: 40,
 	};
 	slide3.addText(title, opts);
 	slide3.addText(subtitle, opts2);
@@ -78,14 +78,14 @@ function defaultSlide(pptx: pptxgen, data: string) {
 
 	let slide4 = pptx.addSlide({ sectionTitle: "SongLyrics", masterName: "DEFAULT_SLIDE" });
 	let opts: pptxgen.TextPropsOptions = {
-		x: 0,
+		x: 0.8,
 		y: '10%',
 		w: "100%",
 		color: '#FFFFFF',
 		h: '70%',
-		align: "center",
+		align: "left",
 		breakLine: true,
-		fontSize: 40,
+		fontSize: 65,
 	};
 	slide4.addText(dataLine, opts);
 }
