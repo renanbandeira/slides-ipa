@@ -1,5 +1,5 @@
 {
-	"name": "pptxgenjs-react-demo",
+	"name": "slides-ipa",
 	"version": "3.3.0",
 	"private": true,
 	"dependencies": {
@@ -7,7 +7,6 @@
 		"@types/request": "^2.48.5",
 		"cheerio": "^1.0.0-rc.3",
 		"express": "^4.17.1",
-		"local-cors-proxy": "^1.1.0",
 		"pptxgenjs": "^3.3.0",
 		"react": "^16.10.1",
 		"react-dom": "^16.10.1",
@@ -17,7 +16,6 @@
 	},
 	"homepage": "https://slides-ipa.herokuapp.com/",
 	"scripts": {
-		"proxy": "lcp --proxyUrl https://www.letras.mus.br",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",

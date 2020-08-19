@@ -28,7 +28,7 @@ export function createSlides(title: string, subtitle: string, lyrics: string, is
 	strophes.forEach((strophe) => {
 		defaultSlide(pptx, strophe);
 	});
-	pptx.writeFile(`${title.replace(/ /g, '_')}-${subtitle.replace(/ /g, '_')}`).then((fileName) => console.log(`writeFile: ${fileName}`));
+	pptx.writeFile(`${title} - ${subtitle}`).then((fileName) => console.log(`writeFile: ${fileName}`));
 }
 
 function basicDemoSlide(pptx: pptxgen, title: string, subtitle: string) {
