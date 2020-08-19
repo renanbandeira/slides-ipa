@@ -4,8 +4,6 @@
 import { IMGBASE64, MASTERBASE64 } from "../worshipRes";
 import { IMGHYMNBASE64, MASTERHYMNBASE64 } from "../hymnRes";
 import pptxgen from "pptxgenjs";
-import cheerio from "cheerio";
-import request from "request";
 
 export function createSlides(title: string, subtitle: string, lyrics: string, isHymn: boolean) {
 	let pptx = new pptxgen();
