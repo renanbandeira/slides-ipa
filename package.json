@@ -15,7 +15,7 @@
 		"request": "^2.88.2",
 		"typescript": "^3.9.7"
 	},
-	"homepage": "https://gitbrent.github.io/PptxGenJS/demo-react",
+	"homepage": "https://slides-ipa.herokuapp.com/",
 	"scripts": {
 		"proxy": "lcp --proxyUrl https://www.letras.mus.br",
 		"start": "react-scripts start",
