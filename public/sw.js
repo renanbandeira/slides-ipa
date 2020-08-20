@@ -1,4 +1,4 @@
-var CACHE_NAME = 'otimigas-app';
+var CACHE_NAME = 'slides-ipa-app-v1';
 
 var urlsToCache = [
     '/',
@@ -33,4 +33,4 @@ self.addEventListener('fetch', function (event) {
             }
             )
     );
-}); 
+});
