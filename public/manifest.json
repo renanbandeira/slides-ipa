@@ -1,6 +1,6 @@
 {
   "short_name": "Slides IPA",
-  "name": "Slides para a Igreja Presbiteriana da Aldeota",
+  "name": "Slides Igreja Presbiteriana da Aldeota",
   "icons": [
    {
     "src": "\/favicons\/android-icon-36x36.png",
@@ -39,9 +39,9 @@
     "density": "4.0"
    }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "orientation": "portrait-primary",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#03311d",
   "background_color": "#ffffff"
 }
