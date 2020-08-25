@@ -23,19 +23,19 @@ export function createSlides(title: string, subtitle: string, lyrics: string, is
 		title: "DEFAULT_SLIDE",
 		bkgd: { data: isHymn ? IMGHYMNBASE64 : IMGBASE64},
 	});
-	basicDemoSlide(pptx, title, subtitle);
+	createSongTitleSlide(pptx, title, subtitle);
 	const strophes = lyrics.split('\n\n') || [];
 	strophes.forEach((strophe) => {
-		defaultSlide(pptx, strophe);
+		createStropheSlide(pptx, strophe);
 	});
 	pptx.writeFile(`${title} - ${subtitle}`).then((fileName) => console.log(`writeFile: ${fileName}`));
 }
 
-function basicDemoSlide(pptx: pptxgen, title: string, subtitle: string) {
+function createSongTitleSlide(pptx: pptxgen, title: string, subtitle: string) {
 	// LEGACY-TEST: @deprecated in v3.3.0
 	//pptx.addSlide("masterName"); // slide0
 
-	pptx.addSection({ title: "SongTitle" });
+	// pptx.addSection({ title: "SongTitle" });
 
 	// PPTX Method 3:
 	//pptx.addSlide(); // slide1
@@ -65,11 +65,11 @@ function basicDemoSlide(pptx: pptxgen, title: string, subtitle: string) {
 	slide3.addText(subtitle, opts2);
 }
 
-function defaultSlide(pptx: pptxgen, data: string) {
+function createStropheSlide(pptx: pptxgen, data: string) {
 	// LEGACY-TEST: @deprecated in v3.3.0
 	//pptx.addSlide("masterName"); // slide0
 
-	pptx.addSection({ title: "SongLyrics" });
+	// pptx.addSection({ title: "SongLyrics" });
 
 	let dataLine = data.split('\n').map((line) => ({ text: line, breakLine: true }));
 	// PPTX Method 3:
