@@ -1,11 +1,11 @@
 /**
  * Test TypeScript Defs file
  */
-import { IMGBASE64, MASTERBASE64 } from "../worshipRes";
-import { IMGHYMNBASE64, MASTERHYMNBASE64 } from "../hymnRes";
+import { IMGBASE64, MASTERBASE64, IMGADVENTBASE64, MASTERADVENTBASE64 } from "../worshipRes";
+import { IMGHYMNBASE64, MASTERHYMNBASE64, IMGHYMNADVENTBASE64, MASTERHYMNADVENTBASE64 } from "../hymnRes";
 import pptxgen from "pptxgenjs";
 
-export function createSlides(title: string, subtitle: string, lyrics: string, isHymn: boolean) {
+export function createSlides(title: string, subtitle: string, lyrics: string, isHymn: boolean, isAdvent: boolean) {
 	let pptx = new pptxgen();
 
 	// PPTX Method 1:
@@ -13,22 +13,40 @@ export function createSlides(title: string, subtitle: string, lyrics: string, is
 	//pptx.layout = "TST";
 	pptx.layout = "LAYOUT_WIDE";
 
+	let theme = {
+		masterSlide: MASTERHYMNBASE64,
+		defaultSlide: IMGHYMNBASE64
+	};
+
+	if (!isHymn) {
+		if (isAdvent) {
+			theme.masterSlide = MASTERADVENTBASE64;
+			theme.defaultSlide = IMGADVENTBASE64;
+		} else {
+			theme.masterSlide = MASTERBASE64;
+			theme.defaultSlide = IMGBASE64;
+		}
+	} else if (isAdvent) {
+		theme.masterSlide = MASTERHYMNADVENTBASE64;
+		theme.defaultSlide = IMGHYMNADVENTBASE64;
+	}
+
 	// PPTX Method 2:
 	pptx.defineSlideMaster({
 		title: "MASTER_SLIDE",
-		bkgd: { data: isHymn ? MASTERHYMNBASE64 : MASTERBASE64},
+		bkgd: { data: theme.masterSlide },
 	});
 
 	pptx.defineSlideMaster({
 		title: "DEFAULT_SLIDE",
-		bkgd: { data: isHymn ? IMGHYMNBASE64 : IMGBASE64},
+		bkgd: { data: theme.defaultSlide},
 	});
 	createSongTitleSlide(pptx, title, subtitle);
 	const strophes = lyrics.split('\n\n') || [];
 	strophes.forEach((strophe) => {
 		createStropheSlide(pptx, strophe);
 	});
-	pptx.writeFile(`${title} - ${subtitle}`).then((fileName) => console.log(`writeFile: ${fileName}`));
+	pptx.writeFile(`${title} - ${subtitle}${isAdvent ? ' (Advento)' : ''}`).then((fileName) => console.log(`writeFile: ${fileName}`));
 }
 
 function createSongTitleSlide(pptx: pptxgen, title: string, subtitle: string) {
