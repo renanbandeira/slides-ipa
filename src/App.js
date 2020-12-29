@@ -1,101 +1,52 @@
-import React, { useState } from "react";
-import cheerio from "cheerio";
-import request from "request";
+import React, { useRef } from "react";
 import { createSlides } from "./tstest/slideGenerator";
+import SlidesURLLoader from './components/SlidesURLLoader';
+import SlidesContent from './components/SlidesContent';
+import SlidesDownloader from './components/SlidesDownloader';
+import SlidesTheme from './components/SlidesTheme';
 import "./App.css";
 
-function loadLyrics() {
-  const url = document.querySelector('#url').value || '';
-  if (!url.match(/letras.mus.br/g)) {
-    alert('URL inválida!');
-    return;
-  }
-  request({
-    method: 'GET',
-		url: `https://lyrics-scrapping.herokuapp.com/?url=${url.trim()}`
-	}, (err, res, body) => {
-
-    if (err) return console.error(err);
-
-    let $ = cheerio.load(body);
-    // let title = $('title');
-		document.querySelector('#title').value = $('.cnt-head_title h1').text().trim();
-		document.querySelector('#subtitle').value = $('.cnt-head_title h2').text().trim();
-    let lyrics = '';
-		$('.cnt-letra p').each(function (i, element) {
-			let slideContent = "";
-			element.children.forEach((node) => {
-				if (node.data) {
-					slideContent = slideContent + node.data + "\n";
-				}
-			});
-      lyrics = lyrics + slideContent + '\n';
-    });
-    document.querySelector('#lyrics').value = lyrics.trim();
-  });
-}
-
-function loadAndDownloadSlides(isHymn, isAdvent) {
-  const title = document.querySelector('#title').value || '';
-  const subtitle = document.querySelector('#subtitle').value || '';
-  const lyrics = document.querySelector('#lyrics').value || '';
-  if (title === '' || lyrics === '') {
-    alert('Nome da música e letra são obrigatórios!');
-    return;
-  }
-  createSlides(title, subtitle, lyrics, isHymn, isAdvent);
-}
-
 function App() {
-  const [isAdvent, setIsAdvent] = useState(false);
-  function updateAdventTheme(event) {
-    setIsAdvent(event.target.checked)
+  const slidesContentRef = useRef(null);
+  const slidesThemeRef = useRef(null);
+
+  function loadAndDownloadSlides(isHymn) {
+    if (!slidesContentRef.current) {
+      return;
+    }
+    const title = slidesContentRef.current.songTitle || '';
+    const subtitle = slidesContentRef.current.songSubtitle || '';
+    const lyrics = slidesContentRef.current.lyrics || '';
+    if (title === '' || lyrics === '') {
+      alert('Nome da música e letra são obrigatórios!');
+      return;
+    }
+    const isAdvent = slidesThemeRef.current.isAdvent;
+    const isCustomTheme = slidesThemeRef.current.isCustomTheme;
+    const customSlidesData = slidesThemeRef.current.customSlidesData;
+    if (isCustomTheme && (!customSlidesData || !customSlidesData.titleBackground || !customSlidesData.lyricsBackground)) {
+        alert('Você precisa carregar o background do título e das letras!');
+        return;
+    }
+    createSlides(title, subtitle, lyrics, isHymn, isAdvent, isCustomTheme, customSlidesData);
   }
+
   return (
 		<div>
 			<main className="container">
 				<div className="jumbotron mt-5">
 					<h1 className="display-4">Slides IPA</h1>
-            <div className="form-group">
-              <label htmlFor="url">Digite a URL do letras.mus.br:</label>
-              <input type="url" id="url" className="form-control" placeholder="URL" />
-            </div>
-          <button type="button" className="btn btn-secondary w-100" onClick={() => loadLyrics()}>
-            Carregar Letra
-          </button>
+          <SlidesURLLoader onLoadComplete={(data) => slidesContentRef.current.setSongData(data) } />
 					<hr className="my-4" />
             <div className="row">
   						<div className="col">
-                <div className="form-group">
-                  <label htmlFor="lyrics">ou cole a letra aqui:</label>
-    							<textarea className="form-control" id="lyrics" style={{ height: '440px' }}/>
-                  <br />
-                  <label htmlFor="title">Nome da música:</label>
-                  <input type="text" id="title" className="form-control"/>
-                  <br />
-                  <label htmlFor="subtitle">Autor:</label>
-                  <input type="subtitle" id="subtitle" className="form-control" />
-                  <small id="lyricsHelp" className="form-text text-muted">Ao carregar a letra via URL, esses campos serão preenchido automaticamente.</small>
-                </div>
-                <div className="form-check">
-                  <input type="checkbox" className="form-check-input" id="adventCheck" checked={isAdvent} onChange={updateAdventTheme} />
-                  <label className="form-check-label" htmlFor="adventCheck">Tema Advento</label>
-                </div>
+                <SlidesContent ref={slidesContentRef} />
+                <SlidesTheme ref={slidesThemeRef} />
   						</div>
   					</div>
           <hr className="my-4" />
 					<div className="row">
-						<div className="col">
-							<button type="button" className="btn btn-primary w-100" onClick={(_ev) => loadAndDownloadSlides(true, isAdvent)}>
-								Gerar PPTx Hino
-							</button>
-						</div>
-
-            <div className="col">
-							<button type="button" className="btn btn-primary w-100" onClick={(_ev) => loadAndDownloadSlides(false, isAdvent)}>
-								Gerar PPTx Louvor
-							</button>
-						</div>
+            <SlidesDownloader loadAndDownloadSlides={loadAndDownloadSlides} />
 					</div>
 				</div>
 			</main>

@@ -5,7 +5,12 @@ import { IMGBASE64, MASTERBASE64, IMGADVENTBASE64, MASTERADVENTBASE64 } from "..
 import { IMGHYMNBASE64, MASTERHYMNBASE64, IMGHYMNADVENTBASE64, MASTERHYMNADVENTBASE64 } from "../hymnRes";
 import pptxgen from "pptxgenjs";
 
-export function createSlides(title: string, subtitle: string, lyrics: string, isHymn: boolean, isAdvent: boolean) {
+interface SlidesData {
+	titleBackground: string,
+	lyricsBackground: string
+}
+
+export function createSlides(title: string, subtitle: string, lyrics: string, isHymn: boolean, isAdvent: boolean, isCustomTheme: boolean, customSlidesData: SlidesData) {
 	let pptx = new pptxgen();
 
 	// PPTX Method 1:
@@ -18,17 +23,22 @@ export function createSlides(title: string, subtitle: string, lyrics: string, is
 		defaultSlide: IMGHYMNBASE64
 	};
 
-	if (!isHymn) {
-		if (isAdvent) {
-			theme.masterSlide = MASTERADVENTBASE64;
-			theme.defaultSlide = IMGADVENTBASE64;
-		} else {
-			theme.masterSlide = MASTERBASE64;
-			theme.defaultSlide = IMGBASE64;
+	if (isCustomTheme) {
+		theme.masterSlide = customSlidesData.titleBackground;
+		theme.defaultSlide = customSlidesData.lyricsBackground;
+	} else {
+		if (!isHymn) {
+			if (isAdvent) {
+				theme.masterSlide = MASTERADVENTBASE64;
+				theme.defaultSlide = IMGADVENTBASE64;
+			} else {
+				theme.masterSlide = MASTERBASE64;
+				theme.defaultSlide = IMGBASE64;
+			}
+		} else if (isAdvent) {
+			theme.masterSlide = MASTERHYMNADVENTBASE64;
+			theme.defaultSlide = IMGHYMNADVENTBASE64;
 		}
-	} else if (isAdvent) {
-		theme.masterSlide = MASTERHYMNADVENTBASE64;
-		theme.defaultSlide = IMGHYMNADVENTBASE64;
 	}
 
 	// PPTX Method 2:

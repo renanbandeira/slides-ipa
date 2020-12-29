@@ -5,6 +5,7 @@
 	"dependencies": {
 		"@types/cheerio": "^0.22.21",
 		"@types/request": "^2.48.5",
+		"axios": "^0.21.1",
 		"cheerio": "^1.0.0-rc.3",
 		"express": "^4.17.1",
 		"pptxgenjs": "^3.3.0",
