@@ -70,7 +70,7 @@ const SlidesTheme = forwardRef((props, ref) => {
           <input type="file" className="form-control-sm" id="titleBackground" accept=".jpeg" onChange={handleFileSelect} />
           <br />
           <br />
-          <label className="form-label" htmlFor="titleColor">Cor do título</label>
+          <label className="form-label" htmlFor="titleColor">Cor do título: </label>
           <br />
           <TwitterPicker
             id="titleColor"
@@ -79,7 +79,7 @@ const SlidesTheme = forwardRef((props, ref) => {
           />
           <br />
           <br />
-          <label className="form-label" htmlFor="subtitleColor">Cor do subtitulo</label>
+          <label className="form-label" htmlFor="subtitleColor">Cor do subtitulo: </label>
           <br />
           <TwitterPicker
             id="subtitleColor"
@@ -88,7 +88,7 @@ const SlidesTheme = forwardRef((props, ref) => {
           />
           <br />
           <br />
-          <label className="form-label" htmlFor="lyricsBackground">Background da letra</label>
+          <label className="form-label" htmlFor="lyricsBackground">Background da letra: </label>
           <br />
           <input type="file" className="form-control-sm" accept=".jpeg" id="lyricsBackground" onChange={handleFileSelect} />
           <br />
