@@ -25,6 +25,7 @@ function SlidesURLLoader({ onLoadComplete }) {
     }
     var file = files[0];
     try {
+      setLoading(true);
       const pptxFile = await parse(file);
       let pptxContent = '';
       if (pptxFile && pptxFile.slides) {
@@ -56,6 +57,8 @@ function SlidesURLLoader({ onLoadComplete }) {
       }
     } catch (error) {
       alert('Não foi possível abrir esse arquivo!');
+    } finally {
+      setLoading(false);
     }
   }
   return (
