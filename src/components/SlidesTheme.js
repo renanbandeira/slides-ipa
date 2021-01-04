@@ -1,4 +1,5 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
+import { TwitterPicker } from 'react-color';
 
 const RADIO_DATA = {
   TRADITIONAL: 0,
@@ -9,13 +10,20 @@ const RADIO_DATA = {
 const SlidesTheme = forwardRef((props, ref) => {
   const [theme, setTheme] = useState(RADIO_DATA.TRADITIONAL);
   const [customSlidesData, setCustomSlidesData] = useState({});
+  const [titleColor, setTitleColor] = useState('#FFFFFF');
+  const [lyricsColor, setLyricsColor] = useState('#FFFFFF');
+  const [subtitleColor, setSubtitleColor] = useState('#E4B44C');
+
   const isTraditionalTheme = theme === RADIO_DATA.TRADITIONAL;
   const isAdvent = theme === RADIO_DATA.ADVENT;
   const isCustomTheme = theme === RADIO_DATA.CUSTOM;
   useImperativeHandle(ref, () => ({
     isAdvent,
     isCustomTheme,
-    customSlidesData: customSlidesData
+    customSlidesData: customSlidesData,
+    titleColor,
+    lyricsColor,
+    subtitleColor
   }));
   const updateTheme = (ev) => {
     setTheme(RADIO_DATA[ev.target.id]);
@@ -62,9 +70,36 @@ const SlidesTheme = forwardRef((props, ref) => {
           <input type="file" className="form-control-sm" id="titleBackground" accept=".jpeg" onChange={handleFileSelect} />
           <br />
           <br />
+          <label className="form-label" htmlFor="titleColor">Cor do título</label>
+          <br />
+          <TwitterPicker
+            id="titleColor"
+            color={ titleColor }
+            onChangeComplete={ (color) => setTitleColor(color.hex) }
+          />
+          <br />
+          <br />
+          <label className="form-label" htmlFor="subtitleColor">Cor do subtitulo</label>
+          <br />
+          <TwitterPicker
+            id="subtitleColor"
+            color={ subtitleColor }
+            onChangeComplete={ (color) => setSubtitleColor(color.hex) }
+          />
+          <br />
+          <br />
           <label className="form-label" htmlFor="lyricsBackground">Background da letra</label>
           <br />
           <input type="file" className="form-control-sm" accept=".jpeg" id="lyricsBackground" onChange={handleFileSelect} />
+          <br />
+          <br />
+          <label className="form-label" htmlFor="lyricsColor">Cor da letra</label>
+          <br />
+          <TwitterPicker
+            id="lyricsColor"
+            color={ lyricsColor }
+            onChangeComplete={ (color) => setLyricsColor(color.hex) }
+          />
         </div>
       }
     </div>

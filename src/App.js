@@ -24,11 +24,25 @@ function App() {
     const isAdvent = slidesThemeRef.current.isAdvent;
     const isCustomTheme = slidesThemeRef.current.isCustomTheme;
     const customSlidesData = slidesThemeRef.current.customSlidesData;
+    const titleColor = slidesThemeRef.current.titleColor;
+    const subtitleColor = slidesThemeRef.current.subtitleColor;
+    const lyricsColor = slidesThemeRef.current.lyricsColor;
     if (isCustomTheme && (!customSlidesData || !customSlidesData.titleBackground || !customSlidesData.lyricsBackground)) {
         alert('Você precisa carregar o background do título e das letras!');
         return;
     }
-    createSlides(title, subtitle, lyrics, isHymn, isAdvent, isCustomTheme, customSlidesData);
+    createSlides({
+      title,
+      subtitle,
+      lyrics,
+      isHymn,
+      isAdvent,
+      isCustomTheme,
+      titleColor,
+      subtitleColor,
+      lyricsColor,
+      ...customSlidesData
+    });
   }
 
   return (
