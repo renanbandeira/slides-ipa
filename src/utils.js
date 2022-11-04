@@ -6,7 +6,7 @@ export async function loadLyrics(url = '') {
     alert('URL inválida!');
     return;
   }
-  const response = await axios.get(`https://lyrics-scrapping.herokuapp.com/?url=${url.trim()}`);
+  const response = await axios.get(`https://lyrics-scrapping-git-master-renanbandeira-chilipiperc.vercel.app/?url=${url.trim()}`);
   let $ = cheerio.load(response.data);
   let lyrics = '';
   $('.cnt-letra p').each(function (i, element) {

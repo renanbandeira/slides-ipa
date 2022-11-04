@@ -17,7 +17,7 @@
 		"request": "^2.88.2",
 		"typescript": "^3.9.7"
 	},
-	"homepage": "https://slides-ipa.herokuapp.com/",
+	"homepage": "https://slides-ipa.vercel.app/",
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
