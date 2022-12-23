@@ -51,6 +51,7 @@ export function createSlides(options: SlidesData) {
 			if (isAdvent) {
 				theme.masterSlide = MASTERADVENTBASE64;
 				theme.defaultSlide = IMGADVENTBASE64;
+				theme.lyricsColor = '#E4B44C'
 			} else {
 				theme.masterSlide = MASTERBASE64;
 				theme.defaultSlide = IMGBASE64;
@@ -58,6 +59,7 @@ export function createSlides(options: SlidesData) {
 		} else if (isAdvent) {
 			theme.masterSlide = MASTERHYMNADVENTBASE64;
 			theme.defaultSlide = IMGHYMNADVENTBASE64;
+			theme.lyricsColor = '#E4B44C'
 		}
 	}
 
