@@ -5,6 +5,7 @@ import SlidesContent from './components/SlidesContent';
 import SlidesDownloader from './components/SlidesDownloader';
 import SlidesTheme from './components/SlidesTheme';
 import "./App.css";
+import { THEME_OPTIONS } from './themes';
 
 function App() {
   const slidesContentRef = useRef(null);
@@ -21,13 +22,12 @@ function App() {
       alert('Nome da música e letra são obrigatórios!');
       return;
     }
-    const isAdvent = slidesThemeRef.current.isAdvent;
-    const isCustomTheme = slidesThemeRef.current.isCustomTheme;
+    const selectedTheme = slidesThemeRef.current.theme;
     const customSlidesData = slidesThemeRef.current.customSlidesData;
     const titleColor = slidesThemeRef.current.titleColor;
     const subtitleColor = slidesThemeRef.current.subtitleColor;
     const lyricsColor = slidesThemeRef.current.lyricsColor;
-    if (isCustomTheme && (!customSlidesData || !customSlidesData.titleBackground || !customSlidesData.lyricsBackground)) {
+    if (selectedTheme === THEME_OPTIONS.CUSTOM && (!customSlidesData || !customSlidesData.masterSlide || !customSlidesData.defaultSlide)) {
         alert('Você precisa carregar o background do título e das letras!');
         return;
     }
@@ -36,10 +36,9 @@ function App() {
       subtitle,
       lyrics,
       isHymn,
-      isAdvent,
-      isCustomTheme,
       titleColor,
       subtitleColor,
+      selectedTheme,
       lyricsColor,
       ...customSlidesData
     });

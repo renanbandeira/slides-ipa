@@ -1,19 +1,18 @@
 /**
  * Test TypeScript Defs file
  */
-import { IMGBASE64, MASTERBASE64, IMGADVENTBASE64, MASTERADVENTBASE64 } from "../worshipRes";
-import { IMGHYMNBASE64, MASTERHYMNBASE64, IMGHYMNADVENTBASE64, MASTERHYMNADVENTBASE64 } from "../hymnRes";
+import type { ValueOf } from 'type-fest';
 import pptxgen from "pptxgenjs";
+import { THEME_OPTIONS, hymnsThemes, worshipsThemes } from '../themes';
 
 interface SlidesData {
 	title: string,
 	subtitle: string,
 	lyrics: string,
 	isHymn: boolean,
-	isAdvent: boolean,
-	isCustomTheme: boolean,
-	titleBackground: string,
-	lyricsBackground: string,
+	selectedTheme: ValueOf<typeof THEME_OPTIONS>,
+	masterSlide: string,
+	defaultSlide: string,
 	titleColor: string,
 	subtitleColor: string,
 	lyricsColor: string
@@ -22,45 +21,40 @@ interface SlidesData {
 export function createSlides(options: SlidesData) {
 	let pptx = new pptxgen();
 	const { title, subtitle, lyrics, isHymn,
-		isAdvent, isCustomTheme, titleColor,
+		selectedTheme, titleColor,
 		lyricsColor, subtitleColor,
-		titleBackground, lyricsBackground
+		masterSlide, defaultSlide,
 	} = options;
 
 	// PPTX Method 1:
 	pptx.defineLayout({ name: "TST", width: 12, height: 7 });
 	//pptx.layout = "TST";
 	pptx.layout = "LAYOUT_WIDE";
+	const predefinedSlides = isHymn ? hymnsThemes : worshipsThemes
 
-	let theme = {
-		masterSlide: MASTERHYMNBASE64,
-		defaultSlide: IMGHYMNBASE64,
-		titleColor: '#FFFFFF',
-		lyricsColor: '#FFFFFF',
-		subtitleColor: '#E4B44C'
-	};
+	let theme = predefinedSlides.traditional
+	let suffix = ''
 
-	if (isCustomTheme) {
-		theme.masterSlide = titleBackground;
-		theme.defaultSlide = lyricsBackground;
-		theme.titleColor = titleColor;
-		theme.subtitleColor = subtitleColor;
-		theme.lyricsColor = lyricsColor;
-	} else {
-		if (!isHymn) {
-			if (isAdvent) {
-				theme.masterSlide = MASTERADVENTBASE64;
-				theme.defaultSlide = IMGADVENTBASE64;
-				theme.lyricsColor = '#E4B44C'
-			} else {
-				theme.masterSlide = MASTERBASE64;
-				theme.defaultSlide = IMGBASE64;
+	switch (selectedTheme) {
+		case THEME_OPTIONS.ADVENT:
+			theme = predefinedSlides.advent
+			suffix = '(Advento)'
+			break
+		case THEME_OPTIONS.CHRISTMAS:
+			theme = predefinedSlides.christmas
+			suffix = '(Natal)'
+			break
+		case THEME_OPTIONS.CUSTOM:
+			theme = {
+				masterSlide,
+				defaultSlide,
+				titleColor,
+				lyricsColor,
+				subtitleColor,
 			}
-		} else if (isAdvent) {
-			theme.masterSlide = MASTERHYMNADVENTBASE64;
-			theme.defaultSlide = IMGHYMNADVENTBASE64;
-			theme.lyricsColor = '#E4B44C'
-		}
+			break
+		default:
+			break
 	}
 
 	// PPTX Method 2:
@@ -78,7 +72,7 @@ export function createSlides(options: SlidesData) {
 	strophes.forEach((strophe) => {
 		createStropheSlide(pptx, strophe, theme.lyricsColor);
 	});
-	pptx.writeFile(`${title} - ${subtitle}${isAdvent ? ' (Advento)' : ''}`).then((fileName) => console.log(`writeFile: ${fileName}`));
+	pptx.writeFile(`${title} - ${subtitle} ${suffix}`).then((fileName) => console.log(`writeFile: ${fileName}`));
 }
 
 function createSongTitleSlide(pptx: pptxgen, title: string, subtitle: string, titleColor: string, subtitleColor: string) {

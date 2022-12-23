@@ -1,32 +1,27 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
 import { TwitterPicker } from 'react-color';
-
-const RADIO_DATA = {
-  TRADITIONAL: 0,
-  ADVENT: 1,
-  CUSTOM: 2
-}
+import { THEME_OPTIONS } from "../themes";
 
 const SlidesTheme = forwardRef((props, ref) => {
-  const [theme, setTheme] = useState(RADIO_DATA.TRADITIONAL);
+  const [theme, setTheme] = useState(THEME_OPTIONS.TRADITIONAL);
   const [customSlidesData, setCustomSlidesData] = useState({});
   const [titleColor, setTitleColor] = useState('#FFFFFF');
   const [lyricsColor, setLyricsColor] = useState('#FFFFFF');
   const [subtitleColor, setSubtitleColor] = useState('#E4B44C');
 
-  const isTraditionalTheme = theme === RADIO_DATA.TRADITIONAL;
-  const isAdvent = theme === RADIO_DATA.ADVENT;
-  const isCustomTheme = theme === RADIO_DATA.CUSTOM;
+  const isTraditionalTheme = theme === THEME_OPTIONS.TRADITIONAL;
+  const isAdvent = theme === THEME_OPTIONS.ADVENT;
+  const isChristmas = theme === THEME_OPTIONS.CHRISTMAS;
+  const isCustomTheme = theme === THEME_OPTIONS.CUSTOM;
   useImperativeHandle(ref, () => ({
-    isAdvent,
-    isCustomTheme,
+    theme,
     customSlidesData: customSlidesData,
     titleColor,
     lyricsColor,
     subtitleColor
   }));
   const updateTheme = (ev) => {
-    setTheme(RADIO_DATA[ev.target.id]);
+    setTheme(THEME_OPTIONS[ev.target.id]);
   }
   const onFileLoaded = (backgroundType) => (event) => {
       const match = /^data:(.*);base64,(.*)$/.exec(event.target.result);
@@ -59,15 +54,19 @@ const SlidesTheme = forwardRef((props, ref) => {
       <label className="form-check-label" htmlFor="ADVENT">Tema Advento</label>
       <br />
 
+      <input type="radio" name="theme" className="form-check-input" id="CHRISTMAS" checked={isChristmas} onChange={updateTheme} />
+      <label className="form-check-label" htmlFor="CHRISTMAS">Tema Natal</label>
+      <br />
+
       <input type="radio" name="theme" className="form-check-input" id="CUSTOM" checked={isCustomTheme} onChange={updateTheme} />
       <label className="form-check-label" htmlFor="CUSTOM">Tema Personalizado</label>
       <small id="lyricsHelp" className="form-text text-muted">No tema personalizado, os botões de gerar hino ou gerar louvor tem o mesmo comportamento</small>
 
       {isCustomTheme &&
         <div>
-          <label className="form-label" htmlFor="titleBackground">Background do título</label>
+          <label className="form-label" htmlFor="masterSlide">Background do título</label>
           <br />
-          <input type="file" className="form-control-sm" id="titleBackground" accept=".jpeg" onChange={handleFileSelect} />
+          <input type="file" className="form-control-sm" id="masterSlide" accept=".jpeg" onChange={handleFileSelect} />
           <br />
           <br />
           <label className="form-label" htmlFor="titleColor">Cor do título: </label>
@@ -88,9 +87,9 @@ const SlidesTheme = forwardRef((props, ref) => {
           />
           <br />
           <br />
-          <label className="form-label" htmlFor="lyricsBackground">Background da letra: </label>
+          <label className="form-label" htmlFor="defaultSlide">Background da letra: </label>
           <br />
-          <input type="file" className="form-control-sm" accept=".jpeg" id="lyricsBackground" onChange={handleFileSelect} />
+          <input type="file" className="form-control-sm" accept=".jpeg" id="defaultSlide" onChange={handleFileSelect} />
           <br />
           <br />
           <label className="form-label" htmlFor="lyricsColor">Cor da letra</label>
