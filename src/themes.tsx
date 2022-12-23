@@ -44,7 +44,7 @@ export const worshipsThemes = {
 		masterSlide: MASTERCHRISTMASBASE64,
 		defaultSlide: IMGCHRISTMASBASE64,
     titleColor: '#FFFFFF',
-    lyricsColor: '#EB144C', // FF6900
+    lyricsColor: '#AF111C',
     subtitleColor: '#E4B44C',
 	},
 	traditional: {

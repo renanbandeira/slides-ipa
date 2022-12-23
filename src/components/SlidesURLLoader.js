@@ -28,8 +28,10 @@ function SlidesURLLoader({ onLoadComplete }) {
       setLoading(true);
       const pptxFile = await parse(file);
       let pptxContent = '';
+      let title = '';
+      let subtitle = '';
       if (pptxFile && pptxFile.slides) {
-        pptxFile.slides.forEach((slide) => {
+        pptxFile.slides.forEach((slide, slideIndex) => {
           if (slide.pageElements) {
             slide.pageElements.forEach((pageElement) => {
               if (pageElement.shape && pageElement.shape.text && pageElement.shape.text.paragraphs) {
@@ -37,7 +39,15 @@ function SlidesURLLoader({ onLoadComplete }) {
                   if (paragraph.textSpans) {
                     paragraph.textSpans.forEach((textSpan) => {
                       if (textSpan.textRun && textSpan.textRun.content) {
-                        pptxContent += `${textSpan.textRun.content}\n`;
+                        if (slideIndex === 0) {
+                          if (!title) {
+                            title = textSpan.textRun.content.trim()
+                          } else {
+                            subtitle = textSpan.textRun.content.trim()
+                          }
+                        } else {
+                          pptxContent += `${textSpan.textRun.content}\n`;
+                        }
                       }
                     });
                   }
@@ -48,8 +58,8 @@ function SlidesURLLoader({ onLoadComplete }) {
           pptxContent += '\n';
         });
         onLoadComplete({
-          title: '',
-          subtitle: '',
+          title,
+          subtitle,
           lyrics: pptxContent.trim()
         });
       } else {
