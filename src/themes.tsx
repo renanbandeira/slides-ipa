@@ -1,11 +1,12 @@
-import { MASTERHYMNADVENTBASE64, IMGHYMNADVENTBASE64, MASTERHYMNCHRISTMASBASE64, IMGHYMNCHRISTMASBASE64, MASTERHYMNBASE64, IMGHYMNBASE64 } from "./hymnRes"
-import { IMGADVENTBASE64, IMGBASE64, IMGCHRISTMASBASE64, MASTERADVENTBASE64, MASTERBASE64, MASTERCHRISTMASBASE64 } from "./worshipRes"
+import { MASTERHYMNADVENTBASE64, IMGHYMNADVENTBASE64, MASTERHYMNCHRISTMASBASE64, IMGHYMNCHRISTMASBASE64, MASTERHYMNBASE64, IMGHYMNBASE64, MASTERHYMNNEWYEARBASE64, IMGHYMNNEWYEARBASE64 } from "./hymnRes"
+import { IMGADVENTBASE64, IMGBASE64, IMGCHRISTMASBASE64, MASTERADVENTBASE64, MASTERBASE64, MASTERCHRISTMASBASE64, MASTERNEWYEARBASE64, IMGNEWYEARBASE64 } from "./worshipRes"
 
 export const THEME_OPTIONS = {
   TRADITIONAL: 0,
   ADVENT: 1,
   CHRISTMAS: 2,
-  CUSTOM: 3,
+  NEW_YEAR: 3,
+  CUSTOM: 4,
 }
 
 export const hymnsThemes = {
@@ -22,6 +23,13 @@ export const hymnsThemes = {
     titleColor: '#FFFFFF',
     lyricsColor: '#FFFFFF',
     subtitleColor: '#E4B44C'
+	},
+  newYear: {
+		masterSlide: MASTERHYMNNEWYEARBASE64,
+		defaultSlide: IMGHYMNNEWYEARBASE64,
+    titleColor: '#B5923C',
+    lyricsColor: '#FFFFFF',
+    subtitleColor: '#DECA7B'
 	},
 	traditional: {
 		masterSlide: MASTERHYMNBASE64,
@@ -46,6 +54,13 @@ export const worshipsThemes = {
     titleColor: '#FFFFFF',
     lyricsColor: '#AF111C',
     subtitleColor: '#E4B44C',
+	},
+  newYear: {
+		masterSlide: MASTERNEWYEARBASE64,
+		defaultSlide: IMGNEWYEARBASE64,
+    titleColor: '#FFFFFF',
+    lyricsColor: '#B5923C',
+    subtitleColor: '#DECA7B'
 	},
 	traditional: {
 		masterSlide: MASTERBASE64,

@@ -44,6 +44,10 @@ export function createSlides(options: SlidesData) {
 			theme = predefinedSlides.christmas
 			suffix = '(Natal)'
 			break
+		case THEME_OPTIONS.NEW_YEAR:
+			theme = predefinedSlides.newYear
+			suffix = '(Ano Novo)'
+			break
 		case THEME_OPTIONS.CUSTOM:
 			theme = {
 				masterSlide,

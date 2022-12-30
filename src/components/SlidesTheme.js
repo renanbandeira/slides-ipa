@@ -12,6 +12,7 @@ const SlidesTheme = forwardRef((props, ref) => {
   const isTraditionalTheme = theme === THEME_OPTIONS.TRADITIONAL;
   const isAdvent = theme === THEME_OPTIONS.ADVENT;
   const isChristmas = theme === THEME_OPTIONS.CHRISTMAS;
+  const isNewYear = theme === THEME_OPTIONS.NEW_YEAR;
   const isCustomTheme = theme === THEME_OPTIONS.CUSTOM;
   useImperativeHandle(ref, () => ({
     theme,
@@ -56,6 +57,10 @@ const SlidesTheme = forwardRef((props, ref) => {
 
       <input type="radio" name="theme" className="form-check-input" id="CHRISTMAS" checked={isChristmas} onChange={updateTheme} />
       <label className="form-check-label" htmlFor="CHRISTMAS">Tema Natal</label>
+      <br />
+
+      <input type="radio" name="theme" className="form-check-input" id="NEW_YEAR" checked={isNewYear} onChange={updateTheme} />
+      <label className="form-check-label" htmlFor="NEW_YEAR">Tema Ano Novo</label>
       <br />
 
       <input type="radio" name="theme" className="form-check-input" id="CUSTOM" checked={isCustomTheme} onChange={updateTheme} />
