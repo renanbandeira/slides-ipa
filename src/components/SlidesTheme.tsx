@@ -1,7 +1,9 @@
 import React, { useState, useImperativeHandle, forwardRef, ChangeEvent } from "react";
+import { MASTERADVENTBASE64, MASTERCHRISTMASBASE64, MASTERBASE64, MASTERNEWYEARBASE64 } from '../worshipRes'
 import type { StringKeyOf, ValueOf } from 'type-fest';
 import { TwitterPicker } from 'react-color';
 import { THEME_OPTIONS } from "../themes";
+import SlideThemeOption from "./SlideThemeOption";
 
 type BackgroundType = 'defaultSlide' | 'masterSlide'
 
@@ -47,10 +49,7 @@ const SlidesTheme = forwardRef((_, ref) => {
     lyricsColor,
     subtitleColor
   } as SlidesThemeRef));
-  const updateTheme = (event: ChangeEvent<HTMLInputElement>) => {
-    const eventTarget = event.target as ThemeEventTarget
-    setTheme(THEME_OPTIONS[eventTarget.id]);
-  }
+  const onSetTheme = (id: StringKeyOf<typeof THEME_OPTIONS>) => setTheme(THEME_OPTIONS[id])
   const onFileLoaded = (backgroundType: BackgroundType) => (event: ProgressEvent<FileEventTarget>) => {
       const match = /^data:(.*);base64,(.*)$/.exec(event.target?.result ?? '');
       if (match == null) {
@@ -77,24 +76,17 @@ const SlidesTheme = forwardRef((_, ref) => {
 }
   return (
     <div className="form-check">
-      <input type="radio" name="theme" className="form-check-input" id="TRADITIONAL" checked={isTraditionalTheme} onChange={updateTheme} />
-      <label className="form-check-label" htmlFor="TRADITIONAL">Tema Tradicional</label>
-      <br />
-
-      <input type="radio" name="theme" className="form-check-input" id="ADVENT" checked={isAdvent} onChange={updateTheme} />
-      <label className="form-check-label" htmlFor="ADVENT">Tema Advento</label>
-      <br />
-
-      <input type="radio" name="theme" className="form-check-input" id="CHRISTMAS" checked={isChristmas} onChange={updateTheme} />
-      <label className="form-check-label" htmlFor="CHRISTMAS">Tema Natal</label>
-      <br />
-
-      <input type="radio" name="theme" className="form-check-input" id="NEW_YEAR" checked={isNewYear} onChange={updateTheme} />
-      <label className="form-check-label" htmlFor="NEW_YEAR">Tema Ano Novo</label>
-      <br />
-
-      <input type="radio" name="theme" className="form-check-input" id="CUSTOM" checked={isCustomTheme} onChange={updateTheme} />
-      <label className="form-check-label" htmlFor="CUSTOM">Tema Personalizado</label>
+      <div className='slide-option-row'>
+        <SlideThemeOption id='TRADITIONAL' isActive={isTraditionalTheme} image={MASTERBASE64} name='Tema Tradicional' onCheck={onSetTheme} />
+        <SlideThemeOption id='ADVENT' isActive={isAdvent} image={MASTERADVENTBASE64} name='Tema Advento' onCheck={onSetTheme} />
+      </div>
+      <div className='slide-option-row'>
+        <SlideThemeOption id='CHRISTMAS' isActive={isChristmas} image={MASTERCHRISTMASBASE64} name='Tema Natal' onCheck={onSetTheme} />
+        <SlideThemeOption id='NEW_YEAR' isActive={isNewYear} image={MASTERNEWYEARBASE64} name='Tema Ano Novo' onCheck={onSetTheme} />
+      </div>
+      <div className='slide-option-row'>
+        <SlideThemeOption id='CUSTOM' isActive={isCustomTheme} name='Tema Personalizado' onCheck={onSetTheme} />
+      </div>
       <small id="lyricsHelp" className="form-text text-muted">No tema personalizado, os botões de gerar hino ou gerar louvor tem o mesmo comportamento</small>
 
       {isCustomTheme &&
@@ -136,4 +128,5 @@ const SlidesTheme = forwardRef((_, ref) => {
     </div>
 	);
 });
+
 export default SlidesTheme;
