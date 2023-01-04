@@ -3,7 +3,7 @@
  */
 import type { ValueOf } from 'type-fest';
 import pptxgen from "pptxgenjs";
-import { THEME_OPTIONS, hymnsThemes, worshipsThemes } from './themes';
+import { THEME_OPTIONS, hymnsThemes, worshipsThemes, formattingOptions } from './themes';
 
 interface SlidesData {
 	title: string,
@@ -80,25 +80,15 @@ export function createSlides(options: SlidesData) {
 }
 
 function createSongTitleSlide(pptx: pptxgen, title: string, subtitle: string, titleColor: string, subtitleColor: string) {
-	let slide3 = pptx.addSlide({ sectionTitle: "SongTitle", masterName: "MASTER_SLIDE" });
-	let opts: pptxgen.TextPropsOptions = {
-		x: 0.8,
-		y: "40%",
-		w: "100%",
+	const slide3 = pptx.addSlide({ sectionTitle: "SongTitle", masterName: "MASTER_SLIDE" });
+	const opts: pptxgen.TextPropsOptions = {
+		...formattingOptions.title,
 		color: titleColor,
-		h: 1.5,
-		align: "left",
-		fontSize: 75,
 	};
 
-	let opts2: pptxgen.TextPropsOptions = {
-		x: 0.8,
-		y: "50%",
-		w: "100%",
-		h: 1.5,
+	const opts2: pptxgen.TextPropsOptions = {
+		...formattingOptions.subtitle,
 		color: subtitleColor,
-		align: "left",
-		fontSize: 40,
 	};
 	slide3.addText(title, opts);
 	slide3.addText(subtitle, opts2);
@@ -110,21 +100,15 @@ function createStropheSlide(pptx: pptxgen, data: string, lyricsColor: string) {
 
 	// pptx.addSection({ title: "SongLyrics" });
 
-	let dataLine = data.split('\n').map((line) => ({ text: line, breakLine: true }));
+	const dataLine = data.split('\n').map((line) => ({ text: line, breakLine: true }));
 	// PPTX Method 3:
 	//pptx.addSlide(); // slide1
 	//pptx.addSlide({ sectionTitle: "TypeScript" }); // slide2
 
-	let slide4 = pptx.addSlide({ sectionTitle: "SongLyrics", masterName: "DEFAULT_SLIDE" });
-	let opts: pptxgen.TextPropsOptions = {
-		x: 0.8,
-		y: '10%',
-		w: "100%",
+	const slide4 = pptx.addSlide({ sectionTitle: "SongLyrics", masterName: "DEFAULT_SLIDE" });
+	const opts: pptxgen.TextPropsOptions = {
+		...formattingOptions.lyrics,
 		color: lyricsColor,
-		h: '70%',
-		align: "left",
-		breakLine: true,
-		fontSize: 65,
 	};
 	slide4.addText(dataLine, opts);
 }
