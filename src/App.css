@@ -44,11 +44,11 @@
 }
 
 .slide-option:hover {
-  background-color: rgb(87, 136, 189);
+  background-color: rgb(55, 90, 127);
 }
 
 .slide-option.active {
-  background-color: rgb(55,90,127);
+  background-color: rgb(87, 136, 189);
   color: white;
 }
 
