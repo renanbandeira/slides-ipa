@@ -28,8 +28,8 @@ to run locally this project
 
 If you want to customize for your church or project, you should:
 
-1- Change background images from presentations (they are base64 images loaded from `src/worshipRes.tsx` and `hymnRes.tsx`). They have two base64 images for each file, one for the master slide (with song title and artist) and the other for all the following slides. You just need to change the Base64 in those files (if you need help to get the Base64 from your image, you can get it [here](https://www.base64-image.de/)).
+1- Change background images from presentations (they are base64 images loaded from `src/worshipRes` and `hymnRes` folders). They have two base64 images for each theme, one for the master slide (with song title and artist) and the other for all the following slides. You just need to change the Base64 in those files (if you need help to get the Base64 from your image, you can get it [here](https://www.base64-image.de/)).
 
-2- Change, if you think is necessary, the text formatting options for each data: [this](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/Test.tsx#L45-L53) is the code for the song title, [this](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/Test.tsx#L55-L63) is the code for song artist, and [this](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/Test.tsx#L80-L89) is the code for the lyrics. You can find more formatting options [here](https://gitbrent.github.io/PptxGenJS/docs/api-text.html).
+2- Change, if you think is necessary, the text colors for each theme [here](https://github.com/renanbandeira/slides-ipa/blob/master/src/themes.tsx). [These](https://github.com/renanbandeira/slides-ipa/blob/master/src/tstest/slideGenerator.tsx#L82-L130) two functions are responsible for advanced styling like alignment, font size and padding. You can find more formatting options [here](https://gitbrent.github.io/PptxGenJS/docs/api-text.html).
 
 3- Run locally to get your presentations or deploy it on somewhere!
