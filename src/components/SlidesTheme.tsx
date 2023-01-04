@@ -1,10 +1,36 @@
-import React, { useState, useImperativeHandle, forwardRef } from "react";
+import React, { useState, useImperativeHandle, forwardRef, ChangeEvent } from "react";
+import type { StringKeyOf, ValueOf } from 'type-fest';
 import { TwitterPicker } from 'react-color';
 import { THEME_OPTIONS } from "../themes";
 
-const SlidesTheme = forwardRef((props, ref) => {
+type BackgroundType = 'defaultSlide' | 'masterSlide'
+
+interface FileEventTarget extends EventTarget {
+  files: FileList,
+  id: BackgroundType,
+  result?: string
+}
+
+interface ThemeEventTarget extends EventTarget {
+  id: StringKeyOf<typeof THEME_OPTIONS>,
+}
+
+interface CustomSlidesData {
+  masterSlide?: string
+  defaultSlide?: string
+}
+
+export interface SlidesThemeRef {
+  theme: ValueOf<typeof THEME_OPTIONS>
+  customSlidesData: CustomSlidesData
+  titleColor: string,
+  lyricsColor: string
+  subtitleColor: string
+}
+
+const SlidesTheme = forwardRef((_, ref) => {
   const [theme, setTheme] = useState(THEME_OPTIONS.TRADITIONAL);
-  const [customSlidesData, setCustomSlidesData] = useState({});
+  const [customSlidesData, setCustomSlidesData] = useState<CustomSlidesData>({});
   const [titleColor, setTitleColor] = useState('#FFFFFF');
   const [lyricsColor, setLyricsColor] = useState('#FFFFFF');
   const [subtitleColor, setSubtitleColor] = useState('#E4B44C');
@@ -20,29 +46,33 @@ const SlidesTheme = forwardRef((props, ref) => {
     titleColor,
     lyricsColor,
     subtitleColor
-  }));
-  const updateTheme = (ev) => {
-    setTheme(THEME_OPTIONS[ev.target.id]);
+  } as SlidesThemeRef));
+  const updateTheme = (event: ChangeEvent<HTMLInputElement>) => {
+    const eventTarget = event.target as ThemeEventTarget
+    setTheme(THEME_OPTIONS[eventTarget.id]);
   }
-  const onFileLoaded = (backgroundType) => (event) => {
-      const match = /^data:(.*);base64,(.*)$/.exec(event.target.result);
+  const onFileLoaded = (backgroundType: BackgroundType) => (event: ProgressEvent<FileEventTarget>) => {
+      const match = /^data:(.*);base64,(.*)$/.exec(event.target?.result ?? '');
       if (match == null) {
           alert('Erro ao caarregar os dados da imagem');
       }
       setCustomSlidesData({
         ...customSlidesData,
-        [backgroundType]: event.target.result
+        [backgroundType]: event.target?.result
       });
   }
-  const handleFileSelect = (e) => {
-    var files = e.target.files;
+  const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    const eventTarget = event.target as FileEventTarget
+    const files = eventTarget.files;
     if (files.length < 1) {
         alert('Precisa selecionar um arquivo');
         return;
     }
-    var file = files[0];
-    var reader = new FileReader();
-    reader.onload = onFileLoaded(e.target.id);
+    const file = files[0];
+    const reader = new FileReader();
+
+    // @ts-ignore there are some limitations on file event types
+    reader.onload = onFileLoaded(eventTarget.id as BackgroundType);
     reader.readAsDataURL(file);
 }
   return (
@@ -77,7 +107,6 @@ const SlidesTheme = forwardRef((props, ref) => {
           <label className="form-label" htmlFor="titleColor">Cor do título: </label>
           <br />
           <TwitterPicker
-            id="titleColor"
             color={ titleColor }
             onChangeComplete={ (color) => setTitleColor(color.hex) }
           />
@@ -86,7 +115,6 @@ const SlidesTheme = forwardRef((props, ref) => {
           <label className="form-label" htmlFor="subtitleColor">Cor do subtitulo: </label>
           <br />
           <TwitterPicker
-            id="subtitleColor"
             color={ subtitleColor }
             onChangeComplete={ (color) => setSubtitleColor(color.hex) }
           />
@@ -100,7 +128,6 @@ const SlidesTheme = forwardRef((props, ref) => {
           <label className="form-label" htmlFor="lyricsColor">Cor da letra</label>
           <br />
           <TwitterPicker
-            id="lyricsColor"
             color={ lyricsColor }
             onChangeComplete={ (color) => setLyricsColor(color.hex) }
           />

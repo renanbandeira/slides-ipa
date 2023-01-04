@@ -3,7 +3,7 @@
  */
 import type { ValueOf } from 'type-fest';
 import pptxgen from "pptxgenjs";
-import { THEME_OPTIONS, hymnsThemes, worshipsThemes } from '../themes';
+import { THEME_OPTIONS, hymnsThemes, worshipsThemes } from './themes';
 
 interface SlidesData {
 	title: string,
@@ -11,8 +11,8 @@ interface SlidesData {
 	lyrics: string,
 	isHymn: boolean,
 	selectedTheme: ValueOf<typeof THEME_OPTIONS>,
-	masterSlide: string,
-	defaultSlide: string,
+	masterSlide?: string,
+	defaultSlide?: string,
 	titleColor: string,
 	subtitleColor: string,
 	lyricsColor: string
@@ -50,8 +50,8 @@ export function createSlides(options: SlidesData) {
 			break
 		case THEME_OPTIONS.CUSTOM:
 			theme = {
-				masterSlide,
-				defaultSlide,
+				masterSlide: masterSlide as string,
+				defaultSlide: defaultSlide as string,
 				titleColor,
 				lyricsColor,
 				subtitleColor,

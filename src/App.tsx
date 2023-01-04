@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
-import { createSlides } from "./tstest/slideGenerator";
+import { createSlides } from "./slideGenerator";
 import SlidesURLLoader from './components/SlidesURLLoader';
-import SlidesContent from './components/SlidesContent';
+import SlidesContent, { SlideContentRef } from './components/SlidesContent';
 import SlidesDownloader from './components/SlidesDownloader';
-import SlidesTheme from './components/SlidesTheme';
+import SlidesTheme, { SlidesThemeRef } from './components/SlidesTheme';
 import "./App.css";
 import { THEME_OPTIONS } from './themes';
 
 function App() {
-  const slidesContentRef = useRef(null);
-  const slidesThemeRef = useRef(null);
+  const slidesContentRef = useRef<SlideContentRef>(null);
+  const slidesThemeRef = useRef<SlidesThemeRef>(null);
 
-  function loadAndDownloadSlides(isHymn) {
+  function loadAndDownloadSlides(isHymn: boolean) {
     if (!slidesContentRef.current) {
       return;
     }
@@ -22,11 +22,11 @@ function App() {
       alert('Nome da música e letra são obrigatórios!');
       return;
     }
-    const selectedTheme = slidesThemeRef.current.theme;
-    const customSlidesData = slidesThemeRef.current.customSlidesData;
-    const titleColor = slidesThemeRef.current.titleColor;
-    const subtitleColor = slidesThemeRef.current.subtitleColor;
-    const lyricsColor = slidesThemeRef.current.lyricsColor;
+    const selectedTheme = slidesThemeRef.current?.theme ?? THEME_OPTIONS.TRADITIONAL;
+    const customSlidesData = slidesThemeRef.current?.customSlidesData ?? {};
+    const titleColor = slidesThemeRef.current?.titleColor ?? '';
+    const subtitleColor = slidesThemeRef.current?.subtitleColor ?? '';
+    const lyricsColor = slidesThemeRef.current?.lyricsColor ?? '';
     if (selectedTheme === THEME_OPTIONS.CUSTOM && (!customSlidesData || !customSlidesData.masterSlide || !customSlidesData.defaultSlide)) {
         alert('Você precisa carregar o background do título e das letras!');
         return;
@@ -49,7 +49,7 @@ function App() {
 			<main className="container">
 				<div className="jumbotron mt-5">
 					<h1 className="display-4">Slides IPA</h1>
-          <SlidesURLLoader onLoadComplete={(data) => slidesContentRef.current.setSongData(data) } />
+          <SlidesURLLoader onLoadComplete={(data) => slidesContentRef.current?.setSongData(data) } />
 					<hr className="my-4" />
             <div className="row">
   						<div className="col">

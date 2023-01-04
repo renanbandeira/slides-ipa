@@ -1,20 +1,29 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
+import { LyricsData } from '../utils';
 
-const SlidesContent = forwardRef((props, ref) => {
+export interface SlideContentRef {
+  setSongData: (data: LyricsData) => void
+  songTitle: string,
+  songSubtitle: string,
+  lyrics: string,
+}
+
+const SlidesContent = forwardRef((_, ref) => {
   const [songTitle, setSongTitle] = useState('');
   const [songSubtitle, setSongSubtitle] = useState('');
   const [lyrics, setLyrics] = useState('');
-  const setSongData = (data) => {
-    setSongTitle(data.title);
-    setSongSubtitle(data.subtitle);
-    setLyrics(data.lyrics);
+  const setSongData = (data: LyricsData) => {
+    setSongTitle(data.title ?? '');
+    setSongSubtitle(data.subtitle ?? '');
+    setLyrics(data.lyrics ?? '');
   }
   useImperativeHandle(ref, () => ({
     setSongData: setSongData,
     songTitle,
     songSubtitle,
     lyrics
-  }));
+  } as SlideContentRef));
+
   return (
     <div className="form-group">
       <label htmlFor="lyrics">ou cole a letra aqui:</label>
@@ -29,4 +38,5 @@ const SlidesContent = forwardRef((props, ref) => {
     </div>
 	);
 });
+
 export default SlidesContent;
