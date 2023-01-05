@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 
-import { loadLyrics, loadPptxFile, LyricsData } from '../utils';
+import { isURLFromLetras, loadLyrics, loadPptxFile, LyricsData, isURLFromNovoCantico } from '../utils';
 
 interface Props {
   onLoadComplete: (data: LyricsData) => void
@@ -12,7 +12,7 @@ const SlidesURLLoader = ({ onLoadComplete }: Props) => {
   async function loadLyricsData() {
     const urlElement = document.querySelector('#url') as HTMLInputElement
     const url = urlElement.value ?? '';
-    if (!url.match(/letras.mus.br/g)) {
+    if (!isURLFromLetras(url) && !isURLFromNovoCantico(url)) {
       alert('URL inválida!');
       return;
     }
@@ -39,7 +39,7 @@ const SlidesURLLoader = ({ onLoadComplete }: Props) => {
   return (
     <>
       <div className="form-group">
-        <label htmlFor="url">Digite a URL do letras.mus.br:</label>
+        <label htmlFor="url">Digite a URL do letras.mus.br ou do novocantico.com.br:</label>
         <input type="url" id="url" className="form-control" placeholder="URL" value={url} onChange={(ev) => setUrl(ev.target.value)} />
       </div>
       <button type="button" className="btn btn-secondary w-100" onClick={async () => isLoading ? null : loadLyricsData()}>
