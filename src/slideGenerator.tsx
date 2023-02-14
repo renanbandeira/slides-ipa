@@ -48,6 +48,10 @@ export function createSlides(options: SlidesData) {
 			theme = predefinedSlides.newYear
 			suffix = '(Ano Novo)'
 			break
+		case THEME_OPTIONS.ACAMP:
+			theme = predefinedSlides.acamp
+			suffix = '(Acampamento)'
+			break
 		case THEME_OPTIONS.CUSTOM:
 			theme = {
 				masterSlide: masterSlide as string,

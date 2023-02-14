@@ -1,6 +1,8 @@
 import { MASTERHYMNADVENTBASE64, IMGHYMNADVENTBASE64, MASTERHYMNCHRISTMASBASE64, IMGHYMNCHRISTMASBASE64, MASTERHYMNBASE64, IMGHYMNBASE64, MASTERHYMNNEWYEARBASE64, IMGHYMNNEWYEARBASE64 } from "./hymnRes"
 import { IMGADVENTBASE64, IMGBASE64, IMGCHRISTMASBASE64, MASTERADVENTBASE64, MASTERBASE64, MASTERCHRISTMASBASE64, MASTERNEWYEARBASE64, IMGNEWYEARBASE64 } from "./worshipRes"
 import pptxgen from "pptxgenjs";
+import { MASTERACAMPBASE64 } from "./worshipRes/masterAcamp";
+import { IMGACAMPBASE64 } from "./worshipRes/imgAcamp";
 
 export const formattingOptions = {
   title: {
@@ -36,13 +38,21 @@ export const THEME_OPTIONS = {
   ADVENT: 1,
   CHRISTMAS: 2,
   NEW_YEAR: 3,
-  CUSTOM: 4,
+	ACAMP: 4,
+  CUSTOM: 5,
 }
 
 export const hymnsThemes = {
 	advent: {
 		masterSlide: MASTERHYMNADVENTBASE64,
 		defaultSlide: IMGHYMNADVENTBASE64,
+    titleColor: '#FFFFFF',
+    lyricsColor: '#FFFFFF',
+    subtitleColor: '#E4B44C',
+	},
+	acamp: {
+		masterSlide: MASTERACAMPBASE64,
+		defaultSlide: IMGACAMPBASE64,
     titleColor: '#FFFFFF',
     lyricsColor: '#FFFFFF',
     subtitleColor: '#E4B44C',
@@ -76,6 +86,13 @@ export const worshipsThemes = {
 		defaultSlide: IMGADVENTBASE64,
     titleColor: '#FFFFFF',
     lyricsColor: '#9900EF',
+    subtitleColor: '#E4B44C',
+	},
+	acamp: {
+		masterSlide: MASTERACAMPBASE64,
+		defaultSlide: IMGACAMPBASE64,
+    titleColor: '#FFFFFF',
+    lyricsColor: '#FFFFFF',
     subtitleColor: '#E4B44C',
 	},
 	christmas: {

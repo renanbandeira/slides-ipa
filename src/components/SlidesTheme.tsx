@@ -4,6 +4,7 @@ import type { StringKeyOf, ValueOf } from 'type-fest';
 import { TwitterPicker } from 'react-color';
 import { THEME_OPTIONS } from "../themes";
 import SlideThemeOption from "./SlideThemeOption";
+import { MASTERACAMPBASE64 } from "../worshipRes/masterAcamp";
 
 type BackgroundType = 'defaultSlide' | 'masterSlide'
 
@@ -41,6 +42,7 @@ const SlidesTheme = forwardRef((_, ref) => {
   const isAdvent = theme === THEME_OPTIONS.ADVENT;
   const isChristmas = theme === THEME_OPTIONS.CHRISTMAS;
   const isNewYear = theme === THEME_OPTIONS.NEW_YEAR;
+  const isAcamp = theme === THEME_OPTIONS.ACAMP;
   const isCustomTheme = theme === THEME_OPTIONS.CUSTOM;
   useImperativeHandle(ref, () => ({
     theme,
@@ -85,6 +87,7 @@ const SlidesTheme = forwardRef((_, ref) => {
         <SlideThemeOption id='NEW_YEAR' isActive={isNewYear} image={MASTERNEWYEARBASE64} name='Tema Ano Novo' onCheck={onSetTheme} />
       </div>
       <div className='slide-option-row'>
+        <SlideThemeOption id='ACAMP' isActive={isAcamp} image={MASTERACAMPBASE64} name='Tema Acampamento' onCheck={onSetTheme} />
         <SlideThemeOption id='CUSTOM' isActive={isCustomTheme} name='Tema Personalizado' onCheck={onSetTheme} />
       </div>
       <small id="lyricsHelp" className="form-text text-muted">No tema personalizado, os botões de gerar hino ou gerar louvor tem o mesmo comportamento</small>
