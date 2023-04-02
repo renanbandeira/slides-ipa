@@ -1,5 +1,5 @@
-import { MASTERHYMNADVENTBASE64, IMGHYMNADVENTBASE64, MASTERHYMNCHRISTMASBASE64, IMGHYMNCHRISTMASBASE64, MASTERHYMNBASE64, IMGHYMNBASE64, MASTERHYMNNEWYEARBASE64, IMGHYMNNEWYEARBASE64 } from "./hymnRes"
-import { IMGADVENTBASE64, IMGBASE64, IMGCHRISTMASBASE64, MASTERADVENTBASE64, MASTERBASE64, MASTERCHRISTMASBASE64, MASTERNEWYEARBASE64, IMGNEWYEARBASE64 } from "./worshipRes"
+import { MASTERHYMNADVENTBASE64, IMGHYMNADVENTBASE64, MASTERHYMNCHRISTMASBASE64, IMGHYMNCHRISTMASBASE64, MASTERHYMNBASE64, IMGHYMNBASE64, MASTERHYMNNEWYEARBASE64, IMGHYMNNEWYEARBASE64, MASTERHYMNRAMOSBASE64, IMGHYMNRAMOSBASE64 } from "./hymnRes"
+import { IMGADVENTBASE64, IMGBASE64, IMGCHRISTMASBASE64, MASTERADVENTBASE64, MASTERBASE64, MASTERCHRISTMASBASE64, MASTERNEWYEARBASE64, IMGNEWYEARBASE64, MASTERRAMOSBASE64, IMGRAMOSBASE64 } from "./worshipRes"
 import pptxgen from "pptxgenjs";
 import { MASTERACAMPBASE64 } from "./worshipRes/masterAcamp";
 import { IMGACAMPBASE64 } from "./worshipRes/imgAcamp";
@@ -38,35 +38,43 @@ export const THEME_OPTIONS = {
   ADVENT: 1,
   CHRISTMAS: 2,
   NEW_YEAR: 3,
-	ACAMP: 4,
-  CUSTOM: 5,
+  ACAMP: 4,
+  RAMOS: 5,
+  CUSTOM: 6,
 }
 
 export const hymnsThemes = {
 	advent: {
-		masterSlide: MASTERHYMNADVENTBASE64,
-		defaultSlide: IMGHYMNADVENTBASE64,
-    titleColor: '#FFFFFF',
-    lyricsColor: '#FFFFFF',
-    subtitleColor: '#E4B44C',
+	  masterSlide: MASTERHYMNADVENTBASE64,
+  	  defaultSlide: IMGHYMNADVENTBASE64,
+	  titleColor: '#FFFFFF',
+	  lyricsColor: '#FFFFFF',
+	  subtitleColor: '#E4B44C',
 	},
 	acamp: {
-		masterSlide: MASTERACAMPBASE64,
-		defaultSlide: IMGACAMPBASE64,
-    titleColor: '#FFFFFF',
-    lyricsColor: '#FFFFFF',
-    subtitleColor: '#E4B44C',
+	  masterSlide: MASTERACAMPBASE64,
+	  defaultSlide: IMGACAMPBASE64,
+      titleColor: '#FFFFFF',
+      lyricsColor: '#FFFFFF',
+      subtitleColor: '#E4B44C',
 	},
 	christmas: {
-		masterSlide: MASTERHYMNCHRISTMASBASE64,
-		defaultSlide: IMGHYMNCHRISTMASBASE64,
-    titleColor: '#FFFFFF',
-    lyricsColor: '#FFFFFF',
-    subtitleColor: '#E4B44C'
+	  masterSlide: MASTERHYMNCHRISTMASBASE64,
+	  defaultSlide: IMGHYMNCHRISTMASBASE64,
+      titleColor: '#FFFFFF',
+      lyricsColor: '#FFFFFF',
+      subtitleColor: '#E4B44C'
 	},
-  newYear: {
-		masterSlide: MASTERHYMNNEWYEARBASE64,
-		defaultSlide: IMGHYMNNEWYEARBASE64,
+	ramos: {
+		masterSlide: MASTERHYMNRAMOSBASE64,
+		defaultSlide: IMGHYMNRAMOSBASE64,
+		titleColor: '#AF111C',
+		lyricsColor: '#FFFFFF',
+		subtitleColor: '#B5923C'
+	  },
+  	newYear: {
+	  masterSlide: MASTERHYMNNEWYEARBASE64,
+	  defaultSlide: IMGHYMNNEWYEARBASE64,
     titleColor: '#B5923C',
     lyricsColor: '#FFFFFF',
     subtitleColor: '#DECA7B'
@@ -98,6 +106,13 @@ export const worshipsThemes = {
 	christmas: {
 		masterSlide: MASTERCHRISTMASBASE64,
 		defaultSlide: IMGCHRISTMASBASE64,
+    titleColor: '#FFFFFF',
+    lyricsColor: '#AF111C',
+    subtitleColor: '#E4B44C',
+	},
+	ramos: {
+		masterSlide: MASTERRAMOSBASE64,
+		defaultSlide: IMGRAMOSBASE64,
     titleColor: '#FFFFFF',
     lyricsColor: '#AF111C',
     subtitleColor: '#E4B44C',

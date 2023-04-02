@@ -52,6 +52,10 @@ export function createSlides(options: SlidesData) {
 			theme = predefinedSlides.acamp
 			suffix = '(Acampamento)'
 			break
+		case THEME_OPTIONS.RAMOS:
+			theme = predefinedSlides.ramos
+			suffix = '(Ramos)'
+			break
 		case THEME_OPTIONS.CUSTOM:
 			theme = {
 				masterSlide: masterSlide as string,
