@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { register as registerSW} from './serviceWorker';
+import { register as registerSW } from './serviceWorker';
 
 // import * as serviceWorker from './serviceWorker';
 

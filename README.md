@@ -19,9 +19,11 @@ yarn install
 ```
 
 This will install all the dependencies. Then, just run:
+
 ```
 yarn start
 ```
+
 to run locally this project
 
 ## Customisation

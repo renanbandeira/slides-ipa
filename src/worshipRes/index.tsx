@@ -8,3 +8,5 @@ export { MASTERNEWYEARBASE64 } from './masterNewYear';
 export { IMGNEWYEARBASE64 } from './imgNewYear';
 export { IMGRAMOSBASE64 } from './imgRamos';
 export { MASTERRAMOSBASE64 } from './masterRamos';
+export { MASTERMAUNDYTHURSDAYBASE64 } from './masterMaundyThursday';
+export { IMGMAUNDYTHURSDAYBASE64 } from './imgMaundyThursday';

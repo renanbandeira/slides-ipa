@@ -52,7 +52,8 @@
   color: white;
 }
 
-.slide-option img, .no-image {
+.slide-option img,
+.no-image {
   margin-bottom: 10px;
   width: 170px;
   height: 100px;
@@ -81,7 +82,8 @@
     width: 300px;
     height: 250px;
   }
-  .slide-option img, .no-image {
+  .slide-option img,
+  .no-image {
     margin-bottom: 5px;
     width: 250px;
     height: 200px;
@@ -96,7 +98,8 @@
     height: 350px;
   }
 
-  .slide-option img, .no-image {
+  .slide-option img,
+  .no-image {
     margin-bottom: 20px;
     width: 350px;
     height: 320px;

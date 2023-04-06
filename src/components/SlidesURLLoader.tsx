@@ -1,16 +1,22 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from 'react';
 
-import { isURLFromLetras, loadLyrics, loadPptxFile, LyricsData, isURLFromNovoCantico } from '../utils';
+import {
+  isURLFromLetras,
+  loadLyrics,
+  loadPptxFile,
+  LyricsData,
+  isURLFromNovoCantico
+} from '../utils';
 
 interface Props {
-  onLoadComplete: (data: LyricsData) => void
+  onLoadComplete: (data: LyricsData) => void;
 }
 
 const SlidesURLLoader = ({ onLoadComplete }: Props) => {
   const [url, setUrl] = useState('');
   const [isLoading, setLoading] = useState(false);
   async function loadLyricsData() {
-    const urlElement = document.querySelector('#url') as HTMLInputElement
+    const urlElement = document.querySelector('#url') as HTMLInputElement;
     const url = urlElement.value ?? '';
     if (!isURLFromLetras(url) && !isURLFromNovoCantico(url)) {
       alert('URL inválida!');
@@ -26,35 +32,51 @@ const SlidesURLLoader = ({ onLoadComplete }: Props) => {
       setLoading(true);
       var files = event.target.files as FileList;
       if (files.length < 1) {
-          alert('Precisa selecionar um arquivo');
-          return;
+        alert('Precisa selecionar um arquivo');
+        return;
       }
       var file = files[0];
-      loadPptxFile(file, alert, onLoadComplete)
+      loadPptxFile(file, alert, onLoadComplete);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <>
       <div className="form-group">
         <label htmlFor="url">Digite a URL do letras.mus.br ou do novocantico.com.br:</label>
-        <input type="url" id="url" className="form-control" placeholder="URL" value={url} onChange={(ev) => setUrl(ev.target.value)} />
+        <input
+          type="url"
+          id="url"
+          className="form-control"
+          placeholder="URL"
+          value={url}
+          onChange={(ev) => setUrl(ev.target.value)}
+        />
       </div>
-      <button type="button" className="btn btn-secondary w-100" onClick={async () => isLoading ? null : loadLyricsData()}>
-        {isLoading ?
-          <div className="spinner-grow" role="status" />
-          : 'Carregar Letra'
-        }
+      <button
+        type="button"
+        className="btn btn-secondary w-100"
+        onClick={async () => (isLoading ? null : loadLyricsData())}
+      >
+        {isLoading ? <div className="spinner-grow" role="status" /> : 'Carregar Letra'}
       </button>
       <div className="form-group">
         <br />
-        <label className="form-label" htmlFor="presentation">ou carregue a letra a partir de uma apresentação existente (PPT ou PPTx):</label>
+        <label className="form-label" htmlFor="presentation">
+          ou carregue a letra a partir de uma apresentação existente (PPT ou PPTx):
+        </label>
         <br />
-        <input type="file" className="form-control-sm" id="presentation" accept=".ppt,.pptx" onChange={handleFileSelect} />
+        <input
+          type="file"
+          className="form-control-sm"
+          id="presentation"
+          accept=".ppt,.pptx"
+          onChange={handleFileSelect}
+        />
       </div>
     </>
-	);
-}
+  );
+};
 export default SlidesURLLoader;
