@@ -76,31 +76,32 @@ const SlidesTheme = forwardRef((_, ref) => {
 
   const rows = Object.keys(THEME_OPTIONS).reduce((acc, option, index, array) => {
     if (index % 2 === 0) {
-      acc.push(array.slice(index, index + 2))
+      acc.push(array.slice(index, index + 2));
     }
-    return acc
-  }, [] as string[][])
+    return acc;
+  }, [] as string[][]);
 
-  const generateOptions = () => (
+  const generateOptions = () =>
     rows.map((themeOptions, i) => {
-      console.log({ themeOptions })
+      console.log({ themeOptions });
       return (
         <div key={i} className="slide-option-row">
           {themeOptions.map((themeOption) => {
-            const option = themeOption as StringKeyOf<typeof THEME_OPTIONS>
-            return (<SlideThemeOption
-              id={option}
-              isActive={theme === THEME_OPTIONS[option] }
-              image={themePreview[THEME_OPTIONS[option]]?.img}
-              key={themeOption}
-              name={`Tema ${themePreview[THEME_OPTIONS[option]]?.name}`}
-              onCheck={onSetTheme}
-            />)
+            const option = themeOption as StringKeyOf<typeof THEME_OPTIONS>;
+            return (
+              <SlideThemeOption
+                id={option}
+                isActive={theme === THEME_OPTIONS[option]}
+                image={themePreview[THEME_OPTIONS[option]]?.img}
+                key={themeOption}
+                name={`Tema ${themePreview[THEME_OPTIONS[option]]?.name}`}
+                onCheck={onSetTheme}
+              />
+            );
           })}
         </div>
-      )
-    })
-  )
+      );
+    });
 
   return (
     <div className="form-check">

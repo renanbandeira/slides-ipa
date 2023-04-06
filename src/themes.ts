@@ -78,40 +78,40 @@ export const THEME_OPTIONS = {
 export const themePreview = {
   [THEME_OPTIONS.TRADITIONAL]: {
     name: 'Tradicional',
-    img: MASTERBASE64,
+    img: MASTERBASE64
   },
   [THEME_OPTIONS.ADVENT]: {
     name: 'Advento',
-    img: MASTERADVENTBASE64,
+    img: MASTERADVENTBASE64
   },
   [THEME_OPTIONS.CHRISTMAS]: {
     name: 'Natal',
-    img: MASTERCHRISTMASBASE64,
+    img: MASTERCHRISTMASBASE64
   },
   [THEME_OPTIONS.NEW_YEAR]: {
     name: 'Ano Novo',
-    img: MASTERNEWYEARBASE64,
+    img: MASTERNEWYEARBASE64
   },
   [THEME_OPTIONS.ACAMP]: {
     name: 'AcampIPA',
-    img: MASTERACAMPBASE64,
+    img: MASTERACAMPBASE64
   },
   [THEME_OPTIONS.RAMOS]: {
     name: 'Ramos',
-    img: MASTERRAMOSBASE64,
+    img: MASTERRAMOSBASE64
   },
   [THEME_OPTIONS.MAUNDY_THURSDAY]: {
     name: 'Quinta Santa',
-    img: MASTERMAUNDYTHURSDAYBASE64,
+    img: MASTERMAUNDYTHURSDAYBASE64
   },
   [THEME_OPTIONS.GOOD_FRIDAY]: {
     name: 'Sexta Santa',
-    img: MASTERGOODFRIDAYBASE64,
+    img: MASTERGOODFRIDAYBASE64
   },
   [THEME_OPTIONS.CUSTOM]: {
-    name: 'Personalizado',
-  },
-}
+    name: 'Personalizado'
+  }
+};
 
 export const hymnsThemes = {
   advent: {
