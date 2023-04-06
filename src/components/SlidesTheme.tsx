@@ -1,17 +1,8 @@
 import React, { useState, useImperativeHandle, forwardRef, ChangeEvent } from 'react';
-import {
-  MASTERADVENTBASE64,
-  MASTERCHRISTMASBASE64,
-  MASTERBASE64,
-  MASTERNEWYEARBASE64,
-  MASTERRAMOSBASE64,
-  MASTERMAUNDYTHURSDAYBASE64
-} from '../worshipRes';
 import type { StringKeyOf, ValueOf } from 'type-fest';
 import { TwitterPicker } from 'react-color';
-import { THEME_OPTIONS } from '../themes';
+import { themePreview, THEME_OPTIONS } from '../themes';
 import SlideThemeOption from './SlideThemeOption';
-import { MASTERACAMPBASE64 } from '../worshipRes/masterAcamp';
 
 type BackgroundType = 'defaultSlide' | 'masterSlide';
 
@@ -44,14 +35,6 @@ const SlidesTheme = forwardRef((_, ref) => {
   const [titleColor, setTitleColor] = useState('#FFFFFF');
   const [lyricsColor, setLyricsColor] = useState('#FFFFFF');
   const [subtitleColor, setSubtitleColor] = useState('#E4B44C');
-
-  const isTraditionalTheme = theme === THEME_OPTIONS.TRADITIONAL;
-  const isAdvent = theme === THEME_OPTIONS.ADVENT;
-  const isChristmas = theme === THEME_OPTIONS.CHRISTMAS;
-  const isNewYear = theme === THEME_OPTIONS.NEW_YEAR;
-  const isAcamp = theme === THEME_OPTIONS.ACAMP;
-  const isRamos = theme === THEME_OPTIONS.RAMOS;
-  const isMaundyThursday = theme === THEME_OPTIONS.MAUNDY_THURSDAY;
   const isCustomTheme = theme === THEME_OPTIONS.CUSTOM;
   useImperativeHandle(
     ref,
@@ -90,71 +73,38 @@ const SlidesTheme = forwardRef((_, ref) => {
     reader.onload = onFileLoaded(eventTarget.id as BackgroundType);
     reader.readAsDataURL(file);
   };
+
+  const rows = Object.keys(THEME_OPTIONS).reduce((acc, option, index, array) => {
+    if (index % 2 === 0) {
+      acc.push(array.slice(index, index + 2))
+    }
+    return acc
+  }, [] as string[][])
+
+  const generateOptions = () => (
+    rows.map((themeOptions, i) => {
+      console.log({ themeOptions })
+      return (
+        <div key={i} className="slide-option-row">
+          {themeOptions.map((themeOption) => {
+            const option = themeOption as StringKeyOf<typeof THEME_OPTIONS>
+            return (<SlideThemeOption
+              id={option}
+              isActive={theme === THEME_OPTIONS[option] }
+              image={themePreview[THEME_OPTIONS[option]]?.img}
+              key={themeOption}
+              name={`Tema ${themePreview[THEME_OPTIONS[option]]?.name}`}
+              onCheck={onSetTheme}
+            />)
+          })}
+        </div>
+      )
+    })
+  )
+
   return (
     <div className="form-check">
-      <div className="slide-option-row">
-        <SlideThemeOption
-          id="TRADITIONAL"
-          isActive={isTraditionalTheme}
-          image={MASTERBASE64}
-          name="Tema Tradicional"
-          onCheck={onSetTheme}
-        />
-        <SlideThemeOption
-          id="ADVENT"
-          isActive={isAdvent}
-          image={MASTERADVENTBASE64}
-          name="Tema Advento"
-          onCheck={onSetTheme}
-        />
-      </div>
-      <div className="slide-option-row">
-        <SlideThemeOption
-          id="MAUNDY_THURSDAY"
-          isActive={isMaundyThursday}
-          name="Tema Quinta Santa"
-          image={MASTERMAUNDYTHURSDAYBASE64}
-          onCheck={onSetTheme}
-        />
-        <SlideThemeOption
-          id="RAMOS"
-          isActive={isRamos}
-          name="Tema Ramos"
-          image={MASTERRAMOSBASE64}
-          onCheck={onSetTheme}
-        />
-      </div>
-      <div className="slide-option-row">
-        <SlideThemeOption
-          id="CHRISTMAS"
-          isActive={isChristmas}
-          image={MASTERCHRISTMASBASE64}
-          name="Tema Natal"
-          onCheck={onSetTheme}
-        />
-        <SlideThemeOption
-          id="NEW_YEAR"
-          isActive={isNewYear}
-          image={MASTERNEWYEARBASE64}
-          name="Tema Ano Novo"
-          onCheck={onSetTheme}
-        />
-      </div>
-      <div className="slide-option-row">
-        <SlideThemeOption
-          id="ACAMP"
-          isActive={isAcamp}
-          image={MASTERACAMPBASE64}
-          name="Tema Acampamento"
-          onCheck={onSetTheme}
-        />
-        <SlideThemeOption
-          id="CUSTOM"
-          isActive={isCustomTheme}
-          name="Tema Personalizado"
-          onCheck={onSetTheme}
-        />
-      </div>
+      {generateOptions()}
       <small id="lyricsHelp" className="form-text text-muted">
         No tema personalizado, os botões de gerar hino ou gerar louvor tem o mesmo comportamento
       </small>

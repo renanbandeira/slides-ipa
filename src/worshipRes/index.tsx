@@ -10,3 +10,5 @@ export { IMGRAMOSBASE64 } from './imgRamos';
 export { MASTERRAMOSBASE64 } from './masterRamos';
 export { MASTERMAUNDYTHURSDAYBASE64 } from './masterMaundyThursday';
 export { IMGMAUNDYTHURSDAYBASE64 } from './imgMaundyThursday';
+export { IMGGOODFRIDAYBASE64 } from './imgGoodFriday';
+export { MASTERGOODFRIDAYBASE64 } from './masterGoodFriday';

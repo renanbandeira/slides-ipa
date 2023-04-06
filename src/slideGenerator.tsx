@@ -67,6 +67,10 @@ export function createSlides(options: SlidesData) {
       theme = predefinedSlides.maundyThursday;
       suffix = '(Quinta Santa)';
       break;
+    case THEME_OPTIONS.GOOD_FRIDAY:
+      theme = predefinedSlides.goodFriday;
+      suffix = '(Sexta Santa)';
+      break;
     case THEME_OPTIONS.CUSTOM:
       theme = {
         masterSlide: masterSlide as string,
